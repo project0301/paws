@@ -2,6 +2,7 @@ const Product = require("../models/Product");
 const mongoose = require("mongoose");
 const connection = require("../config/connection");
 
+
 const products = [   
   new Product({
     name: "Retractable Dog Leash",
@@ -9,7 +10,7 @@ const products = [
     image:
       "",
     quantity: 20,
-    cateogory: "",
+    cateogory: dog,
     price: 12
   },
   {
@@ -18,7 +19,7 @@ const products = [
     image:
       "",
     quantity: 20,
-    cateogory: "",
+    cateogory: cat,
     price: 13
   },
   {
@@ -27,7 +28,7 @@ const products = [
     image:
       "",
     quantity: 10,
-    cateogory: "",
+    cateogory: rodent,
     price: 9
   },
   {
@@ -36,14 +37,23 @@ const products = [
     image:
       "",
     quantity: 3,
-    cateogory: "",
+    cateogory: bird,
     price: 15
+  },
+  {
+    name: "Snake enclosure",
+    description:"30x30 snake enclosure made with glass, and has plenty of space to keep your snake confortable",
+    image:
+      "",
+    quantity: 2,
+    cateogory: reptile,
+    price: 100
   },
   
   ),]
 //connect mongoose
 mongoose
-  .connect(String(dev.db), { useNewUrlParser: true })
+  .connect(String(connection.db), { useNewUrlParser: true })
   .catch(err => {
     console.log(err.stack);
     process.exit(1);
