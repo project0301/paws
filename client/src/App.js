@@ -1,4 +1,4 @@
-import logo from "./assets/logo.png";
+// import logo from "./assets/logo.png";
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import {
@@ -32,13 +32,11 @@ function App() {
 	return (
 		<ApolloProvider client={client}>
 			<Router>
-				<div>
-					<Routes>
-						<Route path="/" element={<App />}>
-							{/* add the various page elements here */}
-						</Route>
-					</Routes>
-				</div>
+				<Routes>
+					<Route path="/" element={<App />}>
+						{/* add the various page elements here */}
+					</Route>
+				</Routes>
 			</Router>
 		</ApolloProvider>
 	);

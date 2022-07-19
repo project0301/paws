@@ -4,6 +4,8 @@
   "private": true,
   "dependencies": {
     "@apollo/client": "^3.6.9",
+    "@chakra-ui/icon": "^3.0.4",
+    "@chakra-ui/react": "^2.2.4",
     "@stripe/stripe-js": "^1.32.0",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
