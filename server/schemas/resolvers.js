@@ -112,6 +112,12 @@ const resolvers = {
 
       throw new AuthenticationError('Not logged in');
     },
+    addProduct: async (parent, args) => {
+      const product = await Product.create(args);
+      const token = signToken(user);
+
+      return { token, user };
+    },
     updateUser: async (parent, args, context) => {
       if (context.user) {
         return await User.findByIdAndUpdate(context.user._id, args, { new: true });
