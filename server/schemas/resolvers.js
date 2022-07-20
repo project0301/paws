@@ -112,11 +112,20 @@ const resolvers = {
 
       throw new AuthenticationError('Not logged in');
     },
-    addProduct: async (parent, args) => {
-      const product = await Product.create(args);
-      const token = signToken(user);
+    addProduct: async (parent, { productToAdd }, context) => {
+      console.log("add",productToAdd,context.product)
+      if (context.product) {
+        const updatedProduct = await Product.findOneAndUpdate(
+          { _id: context.product._id },
+          { $addToSet: { addedProducts: productToAdd } },
+          { new: true, runValidators: true}
+        )
+        .populate("savedBooks");
+       // console.log(updatedUser, "save books")
+        return updatedProduct;
+      }
 
-      return { token, user };
+      throw new AuthenticationError('You need to be logged in!');
     },
     updateUser: async (parent, args, context) => {
       if (context.user) {
