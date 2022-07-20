@@ -120,7 +120,7 @@ const resolvers = {
           { $addToSet: { addedProducts: productToAdd } },
           { new: true, runValidators: true}
         )
-        .populate("savedBooks");
+        .populate("addedProducts");
        // console.log(updatedUser, "save books")
         return updatedProduct;
       }
