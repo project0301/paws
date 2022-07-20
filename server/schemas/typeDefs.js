@@ -64,6 +64,14 @@ const typeDefs = gql`
 		): User
 		updateProduct(_id: ID!, quantity: Int!): Product
 		login(email: String!, password: String!): Auth
+		addProduct(
+			name: String
+			description: String
+			image: String
+			quantity: Int
+			price: Float
+			category: Category
+		): User
 	}
 `;
 
