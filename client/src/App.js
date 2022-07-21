@@ -15,7 +15,7 @@ import Login from "./pages/Signin";
 import Signup from "./pages/Signup";
 import Nav from "./components/Nav";
 import { StoreProvider } from "./utils/GlobalState";
-import Success from "./pages/Success";
+import Success from "./pages/OrderSuccess";
 import OrderHistory from "./pages/OrderHistory";
 
 const httpLink = createHttpLink({
