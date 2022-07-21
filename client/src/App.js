@@ -1,4 +1,3 @@
-// import logo from "./assets/logo.png";
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import {
@@ -10,9 +9,14 @@ import {
 import { setContext } from "@apollo/client/link/context";
 
 import Home from "./pages/Home";
-import Signup from "./pages/Signup";
-import Signin from "./pages/Signin";
+import Detail from "./pages/Detail";
 import NoMatch from "./pages/NoMatch";
+import Login from "./pages/Signin";
+import Signup from "./pages/Signup";
+import Nav from "./components/Nav";
+import { StoreProvider } from "./utils/GlobalState";
+import Success from "./pages/Success";
+import OrderHistory from "./pages/OrderHistory";
 
 const httpLink = createHttpLink({
 	uri: "/graphql",
@@ -37,12 +41,20 @@ function App() {
 	return (
 		<ApolloProvider client={client}>
 			<Router>
-				<Routes>
-					<Route path="/" element={<Home />} />
-					<Route path="/login" element={<Signin />} />
-					<Route path="/signup" element={<Signup />} />
-					<Route element={<NoMatch />} />
-				</Routes>
+				<div>
+					<StoreProvider>
+						<Nav />
+						<Routes>
+							<Route path="/" element={<Home />} />
+							<Route path="/login" element={<Login />} />
+							<Route path="/signup" element={<Signup />} />
+							<Route path="/success" element={<Success />} />
+							<Route path="/orderHistory" element={<OrderHistory />} />
+							<Route path="/products/:id" element={<Detail />} />
+							<Route element={<NoMatch />} />
+						</Routes>
+					</StoreProvider>
+				</div>
 			</Router>
 		</ApolloProvider>
 	);
