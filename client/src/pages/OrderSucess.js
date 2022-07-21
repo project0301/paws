@@ -1,4 +1,4 @@
-import React {useEffect} from 'React';
+import React, {useEffect} from 'React';
 import {useMutations} from '@apollo/client';
 import {ADD_ORDER} from '../utils/mutations';
 import { idbPromise } from '../utils/helpers';
