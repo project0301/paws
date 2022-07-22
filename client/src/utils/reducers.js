@@ -1,6 +1,7 @@
 import { useReducer } from "react";
 
 import {
+  ADD_PRODUCT,
 	UPDATE_PRODUCTS,
 	UPDATE_CATEGORIES,
 	UPDATE_CURRENT_CATEGORY,
@@ -14,6 +15,12 @@ import {
 
 export const reducer = (state, action) => {
 	switch (action.type) {
+    // if action type value is the value of `ADD_PRODUCT`, return a new state object with an updated products array 
+    case ADD_PRODUCT:
+      return {
+        ...state,
+        products: [...action.products]
+      };
 		// if action type value is the value of `UPDATE_PRODUCTS`, return a new state object with an updated products array
 		case UPDATE_PRODUCTS:
 			return {
