@@ -42,3 +42,15 @@ export const ADD_USER = gql`
     }
   }
 `;
+
+export const ADD_PRODUCT = gql`
+  mutation addProduct($name: String!, $image: String!, $descrition: String!, $quantity: Int!, $price: Float!) {
+    addProduct(name: $name, image: $image, description: $description, qunatity: $quantity, price: $price) {
+      name
+      image
+      description
+      price
+      quantity
+    }
+  }
+`;
