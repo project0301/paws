@@ -22,7 +22,7 @@ const customTheme = extendTheme({
     heading: 'Graphic Font',
   },
   fontWeights: {
-    haorline: 100,
+    hairline: 100,
     thin: 200,
     light: 300,
     normal: 400,
