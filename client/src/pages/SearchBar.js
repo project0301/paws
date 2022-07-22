@@ -5,19 +5,22 @@ import { IconButton } from '@chakra-ui/react'
 
 function SearchBar({placeholder, data}) {
     const[filteredData, setFilteredData] = useState[()];
+    const handleFilter =(event) =>{
+       const searchKeyWord = event.target.value
+    }
 
     return (
         <div className ="search">
             <div className ="searchInputs">
-                <input type="text" placeholder= {placeholder} />
+                <input type="text" placeholder= {placeholder} onChange={handlefilter}/>
                 <div className="searchIcon"><searchIcon></searchIcon>
                 </div>
-                {filteredData
+                {filteredData.length !=0 && ()
                 <div className="dataresult">
                     {data.map((value, key)=>{
                         return (
-                            <a className="dataItem" href={value.category}>
-                                <p>{value.category}</p>
+                            <a className="dataItem" href={name.category}>
+                                <p>{name.category}</p>
                             </a>
                         )
                     })}
