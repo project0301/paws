@@ -21,14 +21,14 @@ function ProductList() {
                 products: data.products, 
             });
             data.products.forEach((product) => {
-                idPromise("products", "get").then((products) => {
+                idbPromise("products", "get").then((products) => {
                     dispatch({
                         type: UPDATE_PRODUCTS,
                         products: products,
                     })
                 })
-            }
-        }, [data, loading, dispatch]);
+            }, [data, loading, dispatch])
+        };
 
         function filterProducts() {
             if (!currentCategory) {
@@ -61,6 +61,7 @@ function ProductList() {
             </div>
         );
                 
-        }
-
-        export default ProductList;
+        
+    })
+}
+export default ProductList;
