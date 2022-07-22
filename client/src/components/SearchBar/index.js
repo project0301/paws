@@ -7,8 +7,11 @@ function SearchBar({placeholder, data}) {
     const[filteredData, setFilteredData] = useState[()];
     const handleFilter =(event) =>{
        const searchKeyWord = event.target.value
-    }
-
+       const newfilter = data.filter((value)=> {
+          return name.ctegory.toLowerCase().includes(searchKeyWord.toLowerCase());
+       });
+       setFilteredData(newfilter);
+    };
     return (
         <div className ="search">
             <div className ="searchInputs">
