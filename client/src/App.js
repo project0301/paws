@@ -60,17 +60,6 @@ function App() {
 						</Routes>
 					</StoreProvider>
 				</div>
-				<div>
-				<form>
-					<feildset>
-						<label>
-							<p>search anything</p>
-							<input name = "name" />
-						</label>
-					</feildset>
-					<button type="submit"></button>
-				</form>
-				</div>
 			</Router>
 			<Elements stripe={stripePromise}>
 				<Router>
