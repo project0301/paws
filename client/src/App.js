@@ -16,7 +16,7 @@ import Detail from "./pages/ItemDetail";
 import NoMatch from "./pages/NoMatch";
 import Login from "./pages/Signin";
 import Signup from "./pages/Signup";
-// import Nav from "./components/Nav";
+import Nav from "./components/Nav";
 import { StoreProvider } from "./utils/GlobalState";
 import Success from "./pages/OrderSuccess";
 import OrderHistory from "./pages/OrderHistory";
@@ -45,33 +45,17 @@ const stripePromise = loadStripe("pk_test_TYooMQauvdEDq54NiTphI7jx");
 function App() {
 	return (
 		<ApolloProvider client={client}>
-			<Router>
-				<div>
-					<StoreProvider>
-						<Nav />
-						<Routes>
-							<Route path="/" element={<Home />} />
-							<Route path="/login" element={<Login />} />
-							<Route path="/signup" element={<Signup />} />
-							<Route path="/success" element={<Success />} />
-							<Route path="/orderHistory" element={<OrderHistory />} />
-							<Route path="/products/:id" element={<Detail />} />
-							<Route element={<NoMatch />} />
-						</Routes>
-					</StoreProvider>
-				</div>
-			</Router>
 			<Elements stripe={stripePromise}>
 				<Router>
 					<div>
 						<StoreProvider>
-							{/* <Nav /> */}
+							<Nav />
 							<Routes>
 								<Route path="/" element={<Home />} />
 								<Route path="/login" element={<Login />} />
 								<Route path="/signup" element={<Signup />} />
 								<Route path="/success" element={<Success />} />
-								<Route path="/orderHistory" element={<OrderHistory />} />
+								<Route path="/orders" element={<OrderHistory />} />
 								<Route path="/products/:id" element={<Detail />} />
 								<Route element={<NoMatch />} />
 							</Routes>
