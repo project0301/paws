@@ -45,6 +45,22 @@ const stripePromise = loadStripe("pk_test_TYooMQauvdEDq54NiTphI7jx");
 function App() {
 	return (
 		<ApolloProvider client={client}>
+			<Router>
+				<div>
+					<StoreProvider>
+						<Nav />
+						<Routes>
+							<Route path="/" element={<Home />} />
+							<Route path="/login" element={<Login />} />
+							<Route path="/signup" element={<Signup />} />
+							<Route path="/success" element={<Success />} />
+							<Route path="/orderHistory" element={<OrderHistory />} />
+							<Route path="/products/:id" element={<Detail />} />
+							<Route element={<NoMatch />} />
+						</Routes>
+					</StoreProvider>
+				</div>
+			</Router>
 			<Elements stripe={stripePromise}>
 				<Router>
 					<div>
