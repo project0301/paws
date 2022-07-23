@@ -14,7 +14,7 @@ import {
 } from "./actions";
 
 export const reducer = (state, action) => {
-	switch (action.type) {
+	switch (action.type) {    
     // if action type value is the value of `ADD_PRODUCT`, return a new state object with an updated products array 
     case ADD_PRODUCT:
       return {
