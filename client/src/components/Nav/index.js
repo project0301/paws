@@ -1,48 +1,61 @@
 import React from "react";
 import Auth from "../../utils/auth";
 import { Link } from "react-router-dom";
-import SearchBar from "../SearchBar";
+import { Heading, Box, List, ListItem, UnorderedList } from "@chakra-ui/react";
+import { SearchBar } from "../SearchBar";
 
 function Nav() {
 	function showNavigation() {
 		if (Auth.loggedIn()) {
 			return (
-				<ul className="flex-row">
-					<li className="mx-1">
-						<Link to="/orderHistory"> Order History </Link>
-					</li>
-					<li className="mx-1">
-						{/* this is not using the Link component to logout our user and then refresh the application to the start */}
-						<a href="/" onClick={() => Auth.logout()}>
-							logout
-						</a>
-					</li>
-				</ul>
+				<Box>
+					<List>
+						<UnorderedList className="flex-row">
+							<ListItem className="mx-1">
+								<Link to="/orderHistory"> Order History </Link>
+							</ListItem>
+							<ListItem className="mx-1">
+								{/* this is not using the Link component to logout or user and then refresh the application to the start */}
+								<a
+									href="/"
+									alt="logout of your pet stuff plus account"
+									onClick={() => Auth.logout()}
+								>
+									Logout
+								</a>
+							</ListItem>
+						</UnorderedList>
+					</List>
+				</Box>
 			);
 		} else {
 			return (
-				<ul className="flex-row">
-					<li className="mx-1">
-						<Link to="/signup">Signup</Link>
-					</li>
-					<li className="mx-1">
-						<Link to="/login">Login</Link>
-					</li>
-				</ul>
+				<Box>
+					<List>
+						<UnorderedList className="flex-row">
+							<ListItem className="mx-1">
+								<Link to="/signup">Sign Up</Link>
+							</ListItem>
+							<ListItem className="mx-1">
+								<Link to="/login">Login</Link>
+							</ListItem>
+						</UnorderedList>
+					</List>
+				</Box>
 			);
 		}
 	}
 
 	return (
 		<header className="flex-row px-1">
-			<h1>
+			<Heading as="h1" size="3xl" noOfLines={1}>
 				<Link to="/">
 					<span role="img" aria-label="shopping bag">
 						🛍️
 					</span>
 					Pet Stuff Plus
 				</Link>
-			</h1>
+			</Heading>
 
 			<nav>{showNavigation()}</nav>
 			<SearchBar />
