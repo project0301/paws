@@ -13,25 +13,31 @@ function SearchBar({placeholder, data}) {
        setFilteredData(newfilter);
     };
     return (
-        <div className ="search">
-            <div className ="searchInputs">
-                <input type="text" placeholder= {placeholder} onChange={handlefilter}/>
+        <div className="search">
+            <div className="searchInputs">
+                <input type="text" placeholder={placeholder} onChange={handleFilter}/>
                 <div className="searchIcon"><searchIcon></searchIcon>
                 </div>
-                {filteredData.length !=0 && ()
                 <div className="dataresult">
-                    {data.map((value, key) => {
-                        return (
+                    {data.map((value,key) => {
+                        return(
                             <a className="dataItem" href={name.category}>
-                                <p>{name.category}</p>
+                                <p>
+                                    {name.category}
+                                </p>
                             </a>
                         )
-                    })}
+                    }
+                    )}
                 </div>
-                }
-            </div>
+                
+                
+            </div> 
+
         </div>
     );
-}
+                }
+
+    
 
 export default SearchBar;
