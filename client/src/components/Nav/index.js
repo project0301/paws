@@ -15,7 +15,7 @@ function Nav() {
 	function showNavigation() {
 		if (Auth.loggedIn()) {
 			return (
-				<Breadcrumb fontWeight={"medium"}>
+				<Breadcrumb fontWeight={"medium"} fontSize="x-large">
 					<BreadcrumbItem>
 						<Link to="/orders">Order History</Link>
 					</BreadcrumbItem>
@@ -23,7 +23,7 @@ function Nav() {
 						<Link
 							to="/"
 							alt={"Logout of your Pet Stuff Plus Account"}
-							onClick={Auth.logout()}
+							onClick={() => Auth.logout()}
 						>
 							Logout
 						</Link>

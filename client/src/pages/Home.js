@@ -7,9 +7,9 @@ import { Container } from "@chakra-ui/react";
 const Home = () => {
 	return (
 		<Container>
+			<Cart />
 			<CategoryMenu />
 			<ProductList />
-			<Cart />
 		</Container>
 	);
 };
