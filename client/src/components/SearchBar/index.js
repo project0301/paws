@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Input, InputGroup, Stack } from "@chakra-ui/react";
+import { Input, InputGroup, InputLeftElement } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
 
 function SearchBar({ placeholder, data }) {
@@ -32,24 +32,18 @@ function SearchBar({ placeholder, data }) {
 	// }
 
 	return (
-		<>
-			<Stack spacing={4}>
-				<InputGroup>
-					<Input
-						type="text"
-						size="md"
-						width="auto"
-						placeholder="Search Products"
-						onChange={handleFilter}
-					/>
-					<Button
-						leftIcon={<SearchIcon />}
-						colorScheme="blue"
-						aria-label="Search database"
-					/>
-				</InputGroup>
-			</Stack>
-		</>
+		<InputGroup>
+			<InputLeftElement>
+				<SearchIcon />
+			</InputLeftElement>
+			<Input
+				type="text"
+				htmlSize={"100%"}
+				width={"auto"}
+				placeholder="Search for a product"
+				onChange={handleFilter}
+			/>
+		</InputGroup>
 	);
 }
 
