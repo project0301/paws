@@ -8,7 +8,17 @@ import Auth from "../../utils/auth";
 import { useStoreContext } from "../../utils/GlobalState";
 import { TOGGLE_CART, ADD_MULTIPLE_TO_CART } from "../../utils/actions";
 import "./style.css";
+import {
+	Button,
+	Flex,
+	Heading,
+	Text,
+	CloseButton,
+	Box,
+} from "@chakra-ui/react";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import ShoppingCartCheckoutIcon from "@mui/icons-material/ShoppingCartCheckout";
+
 // require('dotenv').config({path:'../../.env'});
 // const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 const stripePromise = loadStripe("pk_test_TYooMQauvdEDq54NiTphI7jx");
@@ -64,43 +74,74 @@ const Cart = () => {
 
 	if (!state.cartOpen) {
 		return (
-			<div className="cart-closed" onClick={toggleCart}>
-				<ShoppingCartIcon fontSize="large" />
+			<div className="cart-closed">
+				<Flex onClick={toggleCart} position="fixed">
+					<ShoppingCartIcon fontSize="large" />
+				</Flex>
 			</div>
 		);
 	}
 
 	return (
-		<div className="cart">
-			<div className="close" onClick={toggleCart}>
-				[close]
-			</div>
-			<h2>Shopping Cart</h2>
+		<Box className="cart" margin={"5"}>
+			<Box
+				display={"flex"}
+				alignItems={"center"}
+				justifyContent={"space-between"}
+			>
+				<Heading
+					textAlign={"center"}
+					textDecoration={"underline"}
+					paddingLeft={"10"}
+					paddingRight={"3"}
+				>
+					Your Shopping Cart
+				</Heading>
+				<CloseButton marginRight={"2"} size={"lg"} onClick={toggleCart} />
+			</Box>
+
 			{state.cart.length ? (
-				<div>
+				<Box margin={"5"}>
 					{state.cart.map((item) => (
 						<CartItem key={item._id} item={item} />
 					))}
 
-					<div className="flex-row space-between">
-						<strong>Total: ${calculateTotal()}</strong>
+					<Flex
+						flexDirection={"column"}
+						justifyContent={"space-between"}
+						alignContent={"center"}
+						marginTop={"5"}
+					>
+						<Flex justify="space-between">
+							<Text fontSize="lg" fontWeight="semibold">
+								Total
+							</Text>
+							<Text fontSize="xl" fontWeight="extrabold">
+								${calculateTotal()}
+							</Text>
+						</Flex>
 
 						{Auth.loggedIn() ? (
-							<button onClick={submitCheckout}>Checkout</button>
+							<Button
+								colorScheme="gray"
+								size="lg"
+								fontSize="md"
+								rightIcon={<ShoppingCartCheckoutIcon />}
+								onClick={submitCheckout}
+							>
+								Checkout
+							</Button>
 						) : (
-							<span>(log in to check out)</span>
+							<Text fontSize={"2xl"} align={"center"} fontWeight="bold">
+								Please log in to check out
+							</Text>
 						)}
-					</div>
-				</div>
+					</Flex>
+				</Box>
 			) : (
-				<h3>
-					<span role="img" aria-label="shocked">
-						😱
-					</span>
-					You haven't added anything to your cart yet!
-				</h3>
+				<Text>You haven't added anything to your cart yet!</Text>
 			)}
-		</div>
+		</Box>
 	);
 };
 

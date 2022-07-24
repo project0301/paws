@@ -2,7 +2,8 @@ import React from "react";
 import { useStoreContext } from "../../utils/GlobalState";
 import { REMOVE_FROM_CART, UPDATE_CART_QUANTITY } from "../../utils/actions";
 import { idbPromise } from "../../utils/helpers";
-import RemoveIcon from "@mui/icons-material/Remove";
+
+import { Flex, Text, Box, Image, Input } from "@chakra-ui/react";
 
 const CartItem = ({ item }) => {
 	const [, dispatch] = useStoreContext();
@@ -34,26 +35,41 @@ const CartItem = ({ item }) => {
 	};
 
 	return (
-		<div className="flex-row">
-			<div>
-				<img src={`${item.image}`} alt="" />
-			</div>
-			<div>
-				<div>
+		<Flex borderBottom={"1px"} padding="2">
+			<Box>
+				<Image
+					src={`${item.image}`}
+					alt={`${item.name}`}
+					alignContent={"center"}
+				/>
+			</Box>
+			<Box>
+				<Text>
 					{item.name}, ${item.price}
-				</div>
-				<div>
-					<span>Qty:</span>
-					<input
-						type="number"
-						placeholder="1"
+				</Text>
+				<Text>
+					Qty:{" "}
+					<Input
+						variant={"outline"}
+						size={"large"}
+						type={"number"}
+						placeholder={"1"}
 						value={item.purchaseQuantity}
 						onChange={onChange}
 					/>
-					<RemoveIcon onClick={() => removeFromCart(item)} />
-				</div>
-			</div>
-		</div>
+				</Text>
+				<Box>
+					<Text
+						align={"center"}
+						fontWeight={"bold"}
+						onClick={() => removeFromCart(item)}
+						cursor={"pointer"}
+					>
+						Remove from Cart
+					</Text>
+				</Box>
+			</Box>
+		</Flex>
 	);
 };
 
