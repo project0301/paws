@@ -13,6 +13,18 @@ import {
 import { QUERY_PRODUCTS } from "../utils/queries";
 import { idbPromise } from "../utils/helpers";
 import spinner from "../assets/spinner.gif";
+import {
+	Box,
+	Container,
+	Stack,
+	Text,
+	Image,
+	Flex,
+	VStack,
+	Button,
+	Heading,
+	StackDivider,
+} from "@chakra-ui/react";
 
 function Detail() {
 	const [state, dispatch] = useStoreContext();
@@ -82,32 +94,93 @@ function Detail() {
 	};
 
 	return (
-		<>
-			{currentProduct && cart ? (
-				<div className="container my-1">
-					<Link to="/">← Back to Products</Link>
-
-					<h2>{currentProduct.name}</h2>
-
-					<p>{currentProduct.description}</p>
-
-					<p>
-						<strong>Price:</strong>${currentProduct.price}{" "}
-						<button onClick={addToCart}>Add to Cart</button>
-						<button
-							disabled={!cart.find((p) => p._id === currentProduct._id)}
-							onClick={removeFromCart}
+		<Container maxW={"7xl"}>
+			<Flex justifyContent={"center"}>
+				{currentProduct && cart ? (
+					<Box>
+						<Image
+							rounded={"md"}
+							src={`${currentProduct.image}`}
+							alt={currentProduct.name}
+							fit={"cover"}
+							align={"center"}
+							w={"100%"}
+							h={{ base: "100%", sm: "400px", lg: "500px" }}
+						/>
+						<Stack spacing={{ base: 6, md: 10 }}>
+							<Box as={"header"}>
+								<Heading
+									lineHeight={"1.1"}
+									fontWeight={"600"}
+									fontSize={{ base: "2xl", sm: "4xl", lg: "5xl" }}
+									align={"center"}
+								>
+									{currentProduct.name}
+								</Heading>
+								<Text
+									color={"gray.900"}
+									fontWeight={"300"}
+									fontSize={"2xl"}
+									align={"center"}
+								>
+									${currentProduct.price}
+								</Text>
+							</Box>
+							<Stack
+								spacing={{ base: 4, sm: 6 }}
+								direction={"column"}
+								divider={<StackDivider borderColor={"gray.200"} />}
+							>
+								<VStack spacing={{ base: 4, sm: 6 }}>
+									<Text color={"gray.900"} fontSize={"lg"} fontWeight={"300"}>
+										{currentProduct.description}
+									</Text>
+								</VStack>
+							</Stack>
+							<Button
+								rounded={"none"}
+								w={"full"}
+								mt={8}
+								size={"lg"}
+								py={"7"}
+								bg={"gray.900"}
+								color={"white"}
+								textTransform={"uppercase"}
+								_hover={{ transform: "translateY(2px)", boxShadow: "lg" }}
+								onClick={addToCart}
+							>
+								Add to Cart
+							</Button>
+							<Button
+								disabled={!cart.find((p) => p._id === currentProduct._id)}
+								rounded={"none"}
+								w={"full"}
+								mt={8}
+								size={"lg"}
+								py={"7"}
+								bg={"gray.900"}
+								color={"white"}
+								textTransform={"uppercase"}
+								_hover={{ transform: "translateY(2px)", boxShadow: "lg" }}
+								onClick={removeFromCart}
+							>
+								Remove From Cart
+							</Button>
+						</Stack>
+						<Text
+							color={"gray.900"}
+							fontWeight={"300"}
+							fontSize={"2xl"}
+							align={"center"}
 						>
-							Remove from Cart
-						</button>
-					</p>
-
-					<img src={`${currentProduct.image}`} alt={currentProduct.name} />
-				</div>
-			) : null}
-			{loading ? <img src={spinner} alt="loading" /> : null}
+							<Link to="/">← Back to Products</Link>
+						</Text>
+					</Box>
+				) : null}
+				{loading ? <img src={spinner} alt="loading" /> : null}
+			</Flex>
 			<Cart />
-		</>
+		</Container>
 	);
 }
 
