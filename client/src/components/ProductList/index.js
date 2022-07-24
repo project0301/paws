@@ -9,6 +9,8 @@ import spinner from "../../assets/spinner.gif";
 
 import { idbPromise } from "../../utils/helpers";
 
+import { Box, Heading } from "@chakra-ui/react";
+
 function ProductList() {
 	const [state, dispatch] = useStoreContext();
 	const { currentCategory } = state;
@@ -51,26 +53,28 @@ function ProductList() {
 	}
 
 	return (
-		<div className="my-2">
-			<h2>Our Products:</h2>
+		<Box>
+			<Heading>Available Products:</Heading>
 			{state.products.length ? (
-				<div className="flex-row">
-					{filterProducts().map((product) => (
-						<ProductItem
-							key={product._id}
-							_id={product._id}
-							image={product.image}
-							name={product.name}
-							price={product.price}
-							quantity={product.quantity}
-						/>
-					))}
-				</div>
+				<Box p="4" display={{ sm: "flex" }}>
+					<Box flexShrink={0}>
+						{filterProducts().map((product) => (
+							<ProductItem
+								key={product._id}
+								_id={product._id}
+								image={product.image}
+								name={product.name}
+								price={product.price}
+								quantity={product.quantity}
+							/>
+						))}
+					</Box>
+				</Box>
 			) : (
 				<h3>You haven't added any products yet!</h3>
 			)}
 			{loading ? <img src={spinner} alt="loading" /> : null}
-		</div>
+		</Box>
 	);
 }
 
