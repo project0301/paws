@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-
-
-    
-=======
 import React, { useState } from "react";
 import { Button, Input, InputGroup, Stack } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
@@ -57,6 +52,5 @@ function SearchBar({ placeholder, data }) {
 		</>
 	);
 }
->>>>>>> d8974cbd4d2ff2fe941761b592c92c4413e29467
 
 export default SearchBar;
