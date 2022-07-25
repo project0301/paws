@@ -37,7 +37,9 @@ const resolvers = {
 				// update the search query
 				searchQuery = {
 					$or: [
-						{ name: { $regex: search, $options: 'i' } }
+						{ name: { $regex: search, $options: 'i' } },
+						{ description: { $regex: search, $options: 'i' } },
+						{ image: { $regex: search, $options: 'i' } },
 					]
 				};
 			}
