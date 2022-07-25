@@ -9,12 +9,12 @@ import { useStoreContext } from "../../utils/GlobalState";
 import { TOGGLE_CART, ADD_MULTIPLE_TO_CART } from "../../utils/actions";
 import "./style.css";
 import {
+	Box,
 	Button,
 	Flex,
 	Heading,
 	Text,
 	CloseButton,
-	Box,
 } from "@chakra-ui/react";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import ShoppingCartCheckoutIcon from "@mui/icons-material/ShoppingCartCheckout";
@@ -73,11 +73,11 @@ const Cart = () => {
 
 	if (!state.cartOpen) {
 		return (
-			<div className="cart-closed">
+			<Box className="cart-closed">
 				<Flex onClick={toggleCart} position="fixed">
 					<ShoppingCartIcon fontSize="large" />
 				</Flex>
-			</div>
+			</Box>
 		);
 	}
 
@@ -88,7 +88,7 @@ const Cart = () => {
 				alignItems={"center"}
 				justifyContent={"space-between"}
 			>
-				<Heading
+				<Heading as="h1"
 					textAlign={"center"}
 					textDecoration={"underline"}
 					paddingLeft={"10"}
@@ -132,7 +132,7 @@ const Cart = () => {
 							</Button>
 						) : (
 							<Text fontSize={"2xl"} align={"center"} fontWeight="bold">
-								Please log in to check out
+								Please login to check out
 							</Text>
 						)}
 					</Flex>
