@@ -19,9 +19,8 @@ import {
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import ShoppingCartCheckoutIcon from "@mui/icons-material/ShoppingCartCheckout";
 
-// require('dotenv').config({path:'../../.env'});
 // const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
-const stripePromise = loadStripe("pk_test_TYooMQauvdEDq54NiTphI7jx");
+const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 
 const Cart = () => {
 	const [state, dispatch] = useStoreContext();
