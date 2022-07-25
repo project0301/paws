@@ -21,6 +21,8 @@ import { StoreProvider } from "./utils/GlobalState";
 import Success from "./pages/OrderSuccess";
 import OrderHistory from "./pages/OrderHistory";
 
+import { Flex } from "@chakra-ui/react";
+
 const httpLink = createHttpLink({
 	uri: "/graphql",
 });
@@ -47,9 +49,9 @@ function App() {
 		<ApolloProvider client={client}>
 			<Elements stripe={stripePromise}>
 				<Router>
-					<div>
-						<StoreProvider>
-							<Nav />
+					<StoreProvider>
+						<Nav />
+						<Flex>
 							<Routes>
 								<Route path="/" element={<Home />} />
 								<Route path="/login" element={<Login />} />
@@ -59,8 +61,8 @@ function App() {
 								<Route path="/products/:id" element={<Detail />} />
 								<Route element={<NoMatch />} />
 							</Routes>
-						</StoreProvider>
-					</div>
+						</Flex>
+					</StoreProvider>
 				</Router>
 			</Elements>
 		</ApolloProvider>
