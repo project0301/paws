@@ -41,7 +41,7 @@ const resolvers = {
 						{ description: { $regex: search, $options: 'i' } },
 						{ image: { $regex: search, $options: 'i' } },
 					]
-				};
+				}
 			}
 			//execute query to search products
 			const products = await Product.find(searchQuery)

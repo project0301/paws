@@ -31,11 +31,21 @@ export const QUERY_ALL_PRODUCTS = gql`
 	}
 `;
 
-// export const QUERY_PRODUCT = gql`
-//   {
-
-//   }
-// `
+export const QUERY_GET_PRODUCTS = gql`
+query getProducts ($search: String, $page: Int, $limit: Int)
+{
+  getProducts(search: $search, page: $page, limit: $limit) {
+    currentPage
+    totalPages
+    products {
+      name
+      description
+      image
+      price
+    }
+  }
+}
+`;
 
 export const QUERY_CATEGORIES = gql`
 	{
