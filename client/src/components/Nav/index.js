@@ -1,7 +1,7 @@
 import React from "react";
 import Auth from "../../utils/auth";
 import { Link } from "react-router-dom";
-import { Heading, ListItem, UnorderedList, } from '@chakra-ui/react'
+import { Box, Heading, List, ListItem, UnorderedList, } from '@chakra-ui/react'
 
 function Nav() {
   function showNavigation() {
