@@ -7,6 +7,7 @@ import {
 } from "../../utils/actions";
 import { QUERY_CATEGORIES } from "../../utils/queries";
 import { idbPromise } from "../../utils/helpers";
+import { Box, Button, ButtonGroup } from "@chakra-ui/react";
 
 function CategoryMenu() {
 	const [state, dispatch] = useStoreContext();
@@ -42,19 +43,20 @@ function CategoryMenu() {
 	};
 
 	return (
-		<div>
-			<h2>Choose a Category:</h2>
-			{categories.map((item) => (
-				<button
-					key={item._id}
-					onClick={() => {
-						handleClick(item._id);
-					}}
-				>
-					{item.name}
-				</button>
-			))}
-		</div>
+		<Box padding={"5"}>
+			<ButtonGroup margin={"2"}>
+				{categories.map((item) => (
+					<Button
+						key={item._id}
+						onClick={() => {
+							handleClick(item._id);
+						}}
+					>
+						{item.name}
+					</Button>
+				))}
+			</ButtonGroup>
+		</Box>
 	);
 }
 

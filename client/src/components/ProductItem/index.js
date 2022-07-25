@@ -8,7 +8,6 @@ import {
 	Flex,
 	Box,
 	Image,
-	useColorModeValue,
 	Icon,
 	chakra,
 	Tooltip,
@@ -45,14 +44,13 @@ function ProductItem(item) {
 	};
 
 	return (
-		<Flex p={50} w="full" justifyContent="center" alignItems="center">
+		<Flex padding={"5"}>
 			<Box
-				bg={useColorModeValue("white", "gray.800")}
-				maxW="sm"
+				bg={"white"}
+				maxWidth={"md"}
 				borderWidth="1px"
 				rounded="lg"
 				shadow="lg"
-				position="relative"
 			>
 				<Link to={`/products/${_id}`}>
 					<Image

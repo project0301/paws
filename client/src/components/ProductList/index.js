@@ -9,7 +9,7 @@ import spinner from "../../assets/spinner.gif";
 
 import { idbPromise } from "../../utils/helpers";
 
-import { Box, Heading } from "@chakra-ui/react";
+import { Flex, Heading, SimpleGrid, Text } from "@chakra-ui/react";
 
 function ProductList() {
 	const [state, dispatch] = useStoreContext();
@@ -53,28 +53,36 @@ function ProductList() {
 	}
 
 	return (
-		<Box>
-			<Heading>Available Products:</Heading>
+		<Flex
+			flexDirection={"column"}
+			alignItems={"center"}
+			justifyContent={"space-between"}
+		>
+			<Heading justifyContent={"center"}>Available Products:</Heading>
 			{state.products.length ? (
-				<Box p="4" display={{ sm: "flex" }}>
-					<Box flexShrink={0}>
-						{filterProducts().map((product) => (
-							<ProductItem
-								key={product._id}
-								_id={product._id}
-								image={product.image}
-								name={product.name}
-								price={product.price}
-								quantity={product.quantity}
-							/>
-						))}
-					</Box>
-				</Box>
+				<SimpleGrid
+					columns={[1, 2, 3, 4, 5]}
+					spacing={"20px"}
+					alignItems={"center"}
+				>
+					{filterProducts().map((product) => (
+						<ProductItem
+							key={product._id}
+							_id={product._id}
+							image={product.image}
+							name={product.name}
+							price={product.price}
+							quantity={product.quantity}
+						/>
+					))}
+				</SimpleGrid>
 			) : (
-				<h3>You haven't added any products yet!</h3>
+				<Text justifyContent={"center"}>
+					You haven't added any products yet!
+				</Text>
 			)}
 			{loading ? <img src={spinner} alt="loading" /> : null}
-		</Box>
+		</Flex>
 	);
 }
 
