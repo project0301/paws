@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { Input, InputGroup, InputLeftElement } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
-import { Query_GET_PRODUCTS } from "../../utils/queries"; 
+import { QUERY_GET_PRODUCTS, Query_GET_PRODUCTS } from "../../utils/queries"; 
 import {useQuery} from "@apollo/client"; 
 
 function SearchBar({ placeholder, data }) {
 	// ask about this function
-	const {loading, data: productData} = useState({});
+	const {loading, data: productData} = useQuery(QUERY_GET_PRODUCTS);
 	const userData = data?.me || {};
 
 	const [filterData, setFilteredData] = useState({});
