@@ -41,7 +41,7 @@ function Signup(props) {
   
 	return (
 		<Container className="container my-1">
-			<Link to="/login">← Go to Signin</Link>
+			<Link to=".pages/login">← Go to Signin</Link>
 
 			<Heading as='h2'>Signup</Heading>
 			<FormControl onSubmit={handleFormSubmit}>

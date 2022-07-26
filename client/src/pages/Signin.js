@@ -52,39 +52,45 @@ function Login(props) {
 					<Image src={Logo} boxSize="100px" />
 				</Stack>
 			</Stack>
-			<Link to="/signup">← Go to Signup</Link>
 
-			<Heading as="h2">Login</Heading>
-			<FormControl onSubmit={handleFormSubmit}>
-				<Box className="flex-row space-between my-2">
-					<label htmlFor="email">Email address:</label>
-					<input
-						placeholder="youremail@test.com"
-						name="email"
-						type="email"
-						id="email"
-						onChange={handleChange}
-					/>
-				</Box>
-				<Box className="flex-row space-between my-2">
-					<FormLabel htmlFor="pwd">Password:</FormLabel>
-					<Input
-						placeholder="******"
-						name="password"
-						type="password"
-						id="pwd"
-						onChange={handleChange}
-					/>
-				</Box>
-				{error ? (
-					<Box>
-						<p className="error-text">The provided credentials are incorrect</p>
+			<Link to=".pages/signup">← Go to Signup</Link>
+			
+			<Box>
+			  <Heading as="h2">Login</Heading>
+			</Box>
+
+			<Box>
+				<FormControl onSubmit={handleFormSubmit}>
+					<Box className="flex-row space-between my-2">
+						<FormLabel htmlFor="email">Email address:</FormLabel>
+						<Input
+							placeholder="youremail@test.com"
+							name="email"
+							type="email"
+							id="email"
+							onChange={handleChange}
+						/>
 					</Box>
-				) : null}
-				<Box className="flex-row flex-end">
-					<Button type="submit">Submit</Button>
-				</Box>
-			</FormControl>
+					<Box className="flex-row space-between my-2">
+						<FormLabel htmlFor="pwd">Password:</FormLabel>
+						<Input
+							placeholder="******"
+							name="password"
+							type="password"
+							id="pwd"
+							onChange={handleChange}
+						/>
+					</Box>
+					{error ? (
+						<Box>
+							<p className="error-text">The provided credentials are incorrect</p>
+						</Box>
+					) : null}
+					<Box className="flex-row flex-end">
+						<Button type="submit">Submit</Button>
+					</Box>
+				</FormControl>
+			</Box>
 		</Container>
 	);
 }
