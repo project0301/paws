@@ -1,13 +1,16 @@
 import React, { useState } from "react";
-import { Input, InputGroup, InputLeftElement } from "@chakra-ui/react";
+import { Input, InputGroup, InputRightElement, Box } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
 import { QUERY_GET_PRODUCTS} from "../../utils/queries"; 
 import {useQuery} from "@apollo/client"; 
+import { useStoreContext } from "../../utils/GlobalState";
+import { UPDATE_PRODUCTS } from "../../utils/actions";
 
 function SearchBar({ placeholder, data }) {
 	// ask about this function
 	// const {loading, data: productData} = useQuery(QUERY_GET_PRODUCTS);
 const [keyWord, setKeyWord]=useState("");
+const [state, dispatch] = useStoreContext();
 
     const {loading, data: productData} = useQuery(QUERY_GET_PRODUCTS,{
         variables:{
@@ -30,6 +33,11 @@ const [keyWord, setKeyWord]=useState("");
         
         console.log(productData);
 
+        dispatch({
+            type: UPDATE_PRODUCTS,
+            products: productData.getProducts.products,
+        });
+
 		setFilteredData(searchKeyword);
 	};
 	const searchBtn = () => {
@@ -49,6 +57,7 @@ const [keyWord, setKeyWord]=useState("");
 	// }
 
 	return (
+        <Box>
 		<InputGroup>
 			<Input
 				type="text"
@@ -57,10 +66,11 @@ const [keyWord, setKeyWord]=useState("");
 				placeholder="Search for a product"
 				onChange={handleFilter}
 			/>
-			<InputLeftElement> 
-				<SearchIcon onClick={searchBtn} />
-			</InputLeftElement>
+			<InputRightElement> 
+				<SearchIcon onClick={searchBtn} />               
+			</InputRightElement>
 		</InputGroup>
+        </Box>
 	);
 }
 
