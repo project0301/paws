@@ -3,7 +3,7 @@ const { AuthenticationError } = require("apollo-server-express");
 const { User, Product, Category, Order } = require("../models");
 const { signToken } = require("../utils/auth");
 require('dotenv').config();
-const stripe = require('stripe')(process.env.REACT_APP_STRIPE_SECRET_KEY);
+const stripe = require("stripe")(process.env.REACT_APP_STRIPE_SECRET_KEY);
 
 const resolvers = {
 	Query: {
@@ -27,6 +27,34 @@ const resolvers = {
 		},
 		product: async (parent, { _id }) => {
 			return await Product.findById(_id).populate("category");
+		},
+		getProducts: async (_, args) => {
+			const { search = null, page = 1, limit = 20 } = args;
+			let searchQuery = {};
+			// run if search is provided
+			if (search) {
+				// update the search query
+				searchQuery = {
+					$or: [
+						{ name: { $regex: search, $options: 'i' } },
+						{ description: { $regex: search, $options: 'i' } },
+						{ image: { $regex: search, $options: 'i' } },
+					]
+				}
+			}
+			//execute query to search products
+			const products = await Product.find(searchQuery)
+				.limit(limit)
+				.skip((page - 1) * limit)
+				.lean();
+
+			//get total documents
+			const count = await Product.countDocuments(searchQuery);
+			return {
+				products,
+				totalPages: Math.ceil(count / limit),
+				currentPage: page
+			}
 		},
 		user: async (parent, args, context) => {
 			if (context.user) {

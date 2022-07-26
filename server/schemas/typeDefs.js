@@ -39,10 +39,17 @@ const typeDefs = gql`
 		session: ID
 	}
 
+	type ProductsResult {
+		products: [Product]
+		currentPage: Int
+		totalPages: Int
+	}
+
 	type Query {
 		categories: [Category]
 		products(category: ID, name: String): [Product]
 		product(_id: ID): Product
+		getProducts(search: String, page: Int, limit: Int): ProductsResult
 		user: User
 		order(_id: ID!): Order
 		checkout(products: [ID]!): Checkout
