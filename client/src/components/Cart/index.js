@@ -19,7 +19,6 @@ import {
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import ShoppingCartCheckoutIcon from "@mui/icons-material/ShoppingCartCheckout";
 
-// const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
 
 const Cart = () => {
