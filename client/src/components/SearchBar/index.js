@@ -1,10 +1,15 @@
 import React, { useState } from "react";
 import { Input, InputGroup, InputLeftElement } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
+import { Query_GET_PRODUCTS } from "../../utils/queries"; 
+import {useQuery} from "@apollo/client"; 
 
 function SearchBar({ placeholder, data }) {
 	// ask about this function
-	const [filteredData, setFilteredData] = useState({});
+	const {loading, data: productData} = useState({});
+	const userData = data?.me || {};
+
+	const [filterData, setFilteredData] = useState({});
 
 	const handleFilter = (event) => {
 		event.preventDefault();
@@ -15,8 +20,11 @@ function SearchBar({ placeholder, data }) {
 			return value.toLowerCase().includes(searchKeyword.toLowerCase());
 		});
 
-		setFilteredData(newfilter);
+		setFilteredData(searchKeyword);
 	};
+	const searchBtn = () => {
+
+	}
 
 	// {
 	// 	 filteredData.length !== 0 && (
@@ -43,6 +51,10 @@ function SearchBar({ placeholder, data }) {
 				placeholder="Search for a product"
 				onChange={handleFilter}
 			/>
+			<InputLeftElement> 
+				<SearchIcon onClick={searchBtn} />
+
+			</InputLeftElement>
 		</InputGroup>
 	);
 }
