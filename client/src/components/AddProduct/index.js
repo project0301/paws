@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import Auth from "../../utils/auth";
-import { ADD_PRODUCT } from "../utils/mutations";
-import { Schema } from "mongoose";
+import { ADD_PRODUCT } from "../../utils/mutations";
 
 function AddProduct(props) {
   const [formState, setFormState] = useState({
@@ -16,7 +15,7 @@ function AddProduct(props) {
   });
   const [AddProduct] = useMutation(ADD_PRODUCT);
 
-  const handle = useMutation(ADD_PRODUCT);
+  // const handle = useMutation(ADD_PRODUCT);
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -72,7 +71,7 @@ function AddProduct(props) {
             type="number"
             step="0.01"
             id="product-price"
-            placeholder="PRICE"
+            placeholder="price"
             class="col-span-3 lg-col-span-2"
           />
         </form>
