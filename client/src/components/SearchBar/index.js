@@ -25,11 +25,11 @@ function SearchBar({ placeholder, data }) {
 	const searchBtn = () => {
 
 	}
-
+	
 	// {
 	// 	 filteredData.length !== 0 && (
 	// 	 		{/* ask about this during office hours */}
-	// 	 		data.map((value, key) => {
+	// 	 		userData.map((value, key) => {
 	// 	         return (
 	// 	           <a className="dataItem" href={value}>
 	// 	             <p>{value}</p>
