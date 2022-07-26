@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { Input, InputGroup, InputLeftElement } from "@chakra-ui/react";
+import { Input, InputGroup, InputRightElement, Box } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
-import { QUERY_GET_PRODUCTS } from "../../utils/queries"
-import { useQuery } from "@apollo/client"
-
+import { QUERY_GET_PRODUCTS} from "../../utils/queries"; 
+import {useQuery} from "@apollo/client"; 
+import { useStoreContext } from "../../utils/GlobalState";
+import { UPDATE_PRODUCTS } from "../../utils/actions";
 
 function SearchBar({ placeholder, data }) {
 
@@ -12,13 +13,25 @@ function SearchBar({ placeholder, data }) {
 	const userData = data?.me || {};
 
 	// ask about this function
-	const [filteredData, setFilteredData] = useState({});
+	// const {loading, data: productData} = useQuery(QUERY_GET_PRODUCTS);
+const [keyWord, setKeyWord]=useState("");
+const [state, dispatch] = useStoreContext();
+
+    const {loading, data: productData} = useQuery(QUERY_GET_PRODUCTS,{
+        variables:{
+            search: keyWord
+        }
+    });
+	const userData = data?.me || {};
+
+	const [filterData, setFilteredData] = useState({});
 
 
 	const handleFilter = (event) => {
 		event.preventDefault();
 
 		const searchKeyword = event.target.value;
+        setKeyWord(searchKeyword)
 
 		// const newfilter = data.filter((value) => {
 		// 	return value.toLowerCase().includes(searchKeyword.toLowerCase());
@@ -29,19 +42,20 @@ function SearchBar({ placeholder, data }) {
 	const searchBtn = () => {
 
 	}
-	{
-		 filteredData.length !== 0 && (
-		 		{/* ask about this during office hours */}
-		 		userData.map((value, key) => {
-		         return (
-		           <a className="dataItem" href={value}>
-		             <p>{value}</p>
-		           </a>
-		         );
-		       })}
-	}
+	// {
+	// 	 filteredData.length !== 0 && (
+	// 	 		{/* ask about this during office hours */}
+	// 	 		userData.map((value, key) => {
+	// 	         return (
+	// 	           <a className="dataItem" href={value}>
+	// 	             <p>{value}</p>
+	// 	           </a>
+	// 	         );
+	// 	       })}
+	// }
 
 	return (
+        <Box>
 		<InputGroup>
 			<Input
 				type="text"
@@ -50,10 +64,11 @@ function SearchBar({ placeholder, data }) {
 				placeholder="Search for a product"
 				onChange={handleFilter}
 			/>
-			<InputLeftElement>
-				<SearchIcon onClick={searchBtn} />
-			</InputLeftElement>
+			<InputRightElement> 
+				<SearchIcon onClick={searchBtn} />               
+			</InputRightElement>
 		</InputGroup>
+        </Box>
 	);
 }
 
