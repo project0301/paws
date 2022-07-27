@@ -5,11 +5,13 @@ import { QUERY_GET_PRODUCTS } from "../../utils/queries";
 import { useQuery } from "@apollo/client";
 import { useStoreContext } from "../../utils/GlobalState";
 import { UPDATE_PRODUCTS } from "../../utils/actions";
+import spinner from "../../assets/spinner.gif";
+
 
 function SearchBar({ placeholder, data }) {
 
 	const [keyWord, setKeyWord] = useState("");
-	const [state, dispatch] = useStoreContext();
+	const [dispatch] = useStoreContext();
 
 	const { loading, data: productData } = useQuery(QUERY_GET_PRODUCTS, {
 		variables: {
@@ -19,7 +21,7 @@ function SearchBar({ placeholder, data }) {
 
 	const userData = data?.me || {};
 
-	const [filterData, setFilteredData] = useState({});
+	const [setFilteredData] = useState({});
 
 
 	const handleFilter = (event) => {
@@ -58,6 +60,7 @@ function SearchBar({ placeholder, data }) {
 				<SearchIcon />               
 			</InputRightElement>
 		</InputGroup>
+        {loading ? <img src={spinner} alt="loading" /> : null}
         </Box>
 	);
 
