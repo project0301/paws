@@ -13,33 +13,33 @@ import {
   Heading,
   Image,
   Input,
-  Stack
+  Stack,
 } from "@chakra-ui/react";
 
 function Login(props) {
-	const [formState, setFormState] = useState({ email: "", password: "" });
-	const [login, { error }] = useMutation(LOGIN);
+  const [formState, setFormState] = useState({ email: "", password: "" });
+  const [login, { error }] = useMutation(LOGIN);
 
-	const handleFormSubmit = async (event) => {
-		event.preventDefault();
-		try {
-			const mutationResponse = await login({
-				variables: { email: formState.email, password: formState.password },
-			});
-			const token = mutationResponse.data.login.token;
-			Auth.login(token);
-		} catch (e) {
-			console.log(e);
-		}
-	};
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const mutationResponse = await login({
+        variables: { email: formState.email, password: formState.password },
+      });
+      const token = mutationResponse.data.login.token;
+      Auth.login(token);
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
-	const handleChange = (event) => {
-		const { name, value } = event.target;
-		setFormState({
-			...formState,
-			[name]: value,
-		});
-	};
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormState({
+      ...formState,
+      [name]: value,
+    });
+  };
 
 	return (
 		<Container
@@ -70,6 +70,11 @@ function Login(props) {
 							type="email"
 							id="email"
 							onChange={handleChange}
+							pl={"2"}
+							mt="0.1"
+							pt="5"
+							pb="5"
+							w="100%"
 						/>
 					</Box>
 					<Box className="flex-row space-between my-2">
@@ -80,6 +85,11 @@ function Login(props) {
 							type="password"
 							id="pwd"
 							onChange={handleChange}
+							pl={"2"}
+							mt="0.1"
+							pt="1"
+							pb="1"
+							w="100%"
 						/>
 					</Box>
 					{error ? (
@@ -88,7 +98,19 @@ function Login(props) {
 						</Box>
 					) : null}
 					<Box className="flex-row flex-end">
-						<Button type="submit">Submit</Button>
+						<Button
+							type="submit"
+							_hover={{ opacity: "0.8" }}
+							mt="5"
+							pt="5"
+							pb="5"
+							w="22%"
+							color="#black"
+							bg="gray.200"
+							fontSize="lg"
+						>
+							Submit
+						</Button>
 					</Box>
 				  </FormControl>
 				</form>

@@ -1,41 +1,52 @@
 import React, { useState } from "react";
-import { Input, InputGroup, InputLeftElement } from "@chakra-ui/react";
+import { Input, InputGroup, InputRightElement, Box } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
+import { QUERY_GET_PRODUCTS } from "../../utils/queries";
+import { useQuery } from "@apollo/client";
+import { useStoreContext } from "../../utils/GlobalState";
+import { UPDATE_PRODUCTS } from "../../utils/actions";
 
 function SearchBar({ placeholder, data }) {
-	// ask about this function
-	const [filteredData, setFilteredData] = useState({});
+
+	const [keyWord, setKeyWord] = useState("");
+	const [state, dispatch] = useStoreContext();
+
+	const { loading, data: productData } = useQuery(QUERY_GET_PRODUCTS, {
+		variables: {
+			search: keyWord
+		}
+	});
+
+	const userData = data?.me || {};
+
+	const [filterData, setFilteredData] = useState({});
+
 
 	const handleFilter = (event) => {
 		event.preventDefault();
 
 		const searchKeyword = event.target.value;
+		setKeyWord(searchKeyword)
 
-		const newfilter = data.filter((value) => {
-			return value.toLowerCase().includes(searchKeyword.toLowerCase());
+		setFilteredData(searchKeyword);
+		console.log(productData);
+
+		dispatch({
+			type: UPDATE_PRODUCTS,
+			products: productData.getProducts.products,
 		});
 
-		setFilteredData(newfilter);
+		setFilteredData(searchKeyword);
 	};
-
-	// {
-	// 	 filteredData.length !== 0 && (
-	// 	 		{/* ask about this during office hours */}
-	// 	 		data.map((value, key) => {
-	// 	         return (
-	// 	           <a className="dataItem" href={value}>
-	// 	             <p>{value}</p>
-	// 	           </a>
-	// 	         );
-	// 	       })}
-	// 	 );
-	// }
+	
+	  // if data isn't here yet, say so
+		if (loading) {
+			return <h2>LOADING...</h2>;
+		}
 
 	return (
+        <Box>
 		<InputGroup>
-			<InputLeftElement>
-				<SearchIcon />
-			</InputLeftElement>
 			<Input
 				type="text"
 				htmlSize={"100%"}
@@ -43,8 +54,14 @@ function SearchBar({ placeholder, data }) {
 				placeholder="Search for a product"
 				onChange={handleFilter}
 			/>
+			<InputRightElement> 
+				<SearchIcon />               
+			</InputRightElement>
 		</InputGroup>
+        </Box>
 	);
-}
+
+};
+
 
 export default SearchBar;
