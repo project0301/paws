@@ -28,7 +28,6 @@ function SearchBar({ placeholder, data }) {
 		const searchKeyword = event.target.value;
 		setKeyWord(searchKeyword)
 
-		setFilteredData(searchKeyword);
 		console.log(productData);
 
 		dispatch({
