@@ -4,7 +4,17 @@ import { Link } from "react-router-dom";
 import { LOGIN } from "../utils/mutations";
 import Auth from "../utils/auth";
 import Logo from "../assets/logo.png";
-import { Container, Image, Stack } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Container,
+  FormControl,
+  FormLabel,
+  Heading,
+  Image,
+  Input,
+  Stack
+} from "@chakra-ui/react";
 
 function Login(props) {
 	const [formState, setFormState] = useState({ email: "", password: "" });
@@ -44,9 +54,9 @@ function Login(props) {
 			</Stack>
 			<Link to="/signup">← Go to Signup</Link>
 
-			<h2>Login</h2>
-			<form onSubmit={handleFormSubmit}>
-				<div className="flex-row space-between my-2">
+			<Heading as="h2">Login</Heading>
+			<FormControl onSubmit={handleFormSubmit}>
+				<Box className="flex-row space-between my-2">
 					<label htmlFor="email">Email address:</label>
 					<input
 						placeholder="youremail@test.com"
@@ -55,26 +65,26 @@ function Login(props) {
 						id="email"
 						onChange={handleChange}
 					/>
-				</div>
-				<div className="flex-row space-between my-2">
-					<label htmlFor="pwd">Password:</label>
-					<input
+				</Box>
+				<Box className="flex-row space-between my-2">
+					<FormLabel htmlFor="pwd">Password:</FormLabel>
+					<Input
 						placeholder="******"
 						name="password"
 						type="password"
 						id="pwd"
 						onChange={handleChange}
 					/>
-				</div>
+				</Box>
 				{error ? (
-					<div>
+					<Box>
 						<p className="error-text">The provided credentials are incorrect</p>
-					</div>
+					</Box>
 				) : null}
-				<div className="flex-row flex-end">
-					<button type="submit">Submit</button>
-				</div>
-			</form>
+				<Box className="flex-row flex-end">
+					<Button type="submit">Submit</Button>
+				</Box>
+			</FormControl>
 		</Container>
 	);
 }
