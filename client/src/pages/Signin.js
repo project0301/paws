@@ -53,14 +53,15 @@ function Login(props) {
 				</Stack>
 			</Stack>
 
-			<Link to=".pages/signup">← Go to Signup</Link>
+			<Link to="/signup">← Go to Signup</Link>
 			
 			<Box>
 			  <Heading as="h2">Login</Heading>
 			</Box>
 
 			<Box>
-				<FormControl onSubmit={handleFormSubmit}>
+				<form onSubmit={handleFormSubmit}>
+				  <FormControl>
 					<Box className="flex-row space-between my-2">
 						<FormLabel htmlFor="email">Email address:</FormLabel>
 						<Input
@@ -89,7 +90,8 @@ function Login(props) {
 					<Box className="flex-row flex-end">
 						<Button type="submit">Submit</Button>
 					</Box>
-				</FormControl>
+				  </FormControl>
+				</form>
 			</Box>
 		</Container>
 	);

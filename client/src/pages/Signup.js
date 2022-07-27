@@ -41,54 +41,59 @@ function Signup(props) {
   
 	return (
 		<Container className="container my-1">
-			<Link to=".pages/login">← Go to Signin</Link>
-
+		  <Box>
+			<Link to="/login">← Go to Signin</Link>
+		  </Box>
+		  <Box>
 			<Heading as='h2'>Signup</Heading>
-			<FormControl onSubmit={handleFormSubmit}>
-				<Box className="flex-row space-between my-2">
-					<FormLabel htmlFor="firstName">First Name:</FormLabel>
-					<Input
-						placeholder="First"
-						name="firstName"
-						type="firstName"
-						id="firstName"
-						onChange={handleChange}
-					/>
-				</Box>
-				<Box className="flex-row space-between my-2">
-					<FormLabel htmlFor="lastName">Last Name:</FormLabel>
-					<Input
-						placeholder="Last"
-						name="lastName"
-						type="lastName"
-						id="lastName"
-						onChange={handleChange}
-					/>
-				</Box>
-				<Box className="flex-row space-between my-2">
-					<FormLabel htmlFor="email">Email:</FormLabel>
-					<Input
-						placeholder="youremail@test.com"
-						name="email"
-						type="email"
-						id="email"
-						onChange={handleChange}
-					/>
-				</Box>
-				<Box className="flex-row space-between my-2">
-					<FormLabel htmlFor="pwd">Password:</FormLabel>
-					<Input
-						placeholder="******"
-						name="password"
-						type="password"
-						id="pwd"
-						onChange={handleChange}
-					/>
-				</Box>
-				<Box className="flex-row flex-end">
-					<Button size='md' type="submit">Submit</Button>
-				</Box>
-			</FormControl>
+			  <form onSubmit={handleFormSubmit}>
+				<FormControl>
+					<Box className="flex-row space-between my-2">
+						<FormLabel htmlFor="firstName">First Name:</FormLabel>
+						<Input
+							placeholder="First"
+							name="firstName"
+							type="firstName"
+							id="firstName"
+							onChange={handleChange}
+						/>
+					</Box>
+					<Box className="flex-row space-between my-2">
+						<FormLabel htmlFor="lastName">Last Name:</FormLabel>
+						<Input
+							placeholder="Last"
+							name="lastName"
+							type="lastName"
+							id="lastName"
+							onChange={handleChange}
+						/>
+					</Box>
+					<Box className="flex-row space-between my-2">
+						<FormLabel htmlFor="email">Email:</FormLabel>
+						<Input
+							placeholder="youremail@test.com"
+							name="email"
+							type="email"
+							id="email"
+							onChange={handleChange}
+						/>
+					</Box>
+					<Box className="flex-row space-between my-2">
+						<FormLabel htmlFor="pwd">Password:</FormLabel>
+						<Input
+							placeholder="******"
+							name="password"
+							type="password"
+							id="pwd"
+							onChange={handleChange}
+						/>
+					</Box>
+					<Box className="flex-row flex-end">
+						<Button size='md' type="submit">Submit</Button>
+					</Box>
+				</FormControl>
+			  </form>
+			</Box>
 		</Container>
 	);
 }
