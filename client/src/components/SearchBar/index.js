@@ -1,47 +1,42 @@
 import React, { useState } from "react";
 import { Input, InputGroup, InputRightElement, Box } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
-import { QUERY_GET_PRODUCTS } from "../../utils/queries";
-import { useQuery } from "@apollo/client";
+import { QUERY_GET_PRODUCTS} from "../../utils/queries"; 
+import {useQuery} from "@apollo/client"; 
 import { useStoreContext } from "../../utils/GlobalState";
 import { UPDATE_PRODUCTS } from "../../utils/actions";
 
 function SearchBar({ placeholder, data }) {
 
-	const [keyWord, setKeyWord] = useState("");
-	const [state, dispatch] = useStoreContext();
+const [keyWord, setKeyWord]=useState("");
+const [state, dispatch] = useStoreContext();
 
-	const { loading, data: productData } = useQuery(QUERY_GET_PRODUCTS, {
-		variables: {
-			search: keyWord
-		}
-	});
-
+    const {loading, data: productData} = useQuery(QUERY_GET_PRODUCTS,{
+        variables:{
+            search: keyWord
+        }
+    });
 	const userData = data?.me || {};
 
 	const [filterData, setFilteredData] = useState({});
-
 
 	const handleFilter = (event) => {
 		event.preventDefault();
 
 		const searchKeyword = event.target.value;
-		setKeyWord(searchKeyword)
+        setKeyWord(searchKeyword)
 
-		console.log(productData);
+        console.log(productData);
 
-		dispatch({
-			type: UPDATE_PRODUCTS,
-			products: productData.getProducts.products,
-		});
+        dispatch({
+            type: UPDATE_PRODUCTS,
+            products: productData.getProducts.products,
+        });
 
 		setFilteredData(searchKeyword);
 	};
-	
-	  // if data isn't here yet, say so
-		if (loading) {
-			return <h2>LOADING...</h2>;
-		}
+	const searchBtn = () => {
+	}
 
 	return (
         <Box>
@@ -54,13 +49,11 @@ function SearchBar({ placeholder, data }) {
 				onChange={handleFilter}
 			/>
 			<InputRightElement> 
-				<SearchIcon />               
+				<SearchIcon onClick={searchBtn} />               
 			</InputRightElement>
 		</InputGroup>
         </Box>
 	);
-
-};
-
+}
 
 export default SearchBar;
