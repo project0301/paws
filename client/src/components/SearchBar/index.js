@@ -5,28 +5,25 @@ import { QUERY_GET_PRODUCTS } from "../../utils/queries";
 import { useQuery } from "@apollo/client";
 import { useStoreContext } from "../../utils/GlobalState";
 import { UPDATE_PRODUCTS } from "../../utils/actions";
+import spinner from "../../assets/spinner.gif";
 
 function SearchBar({ placeholder, data }) {
-
 	const [keyWord, setKeyWord] = useState("");
-	const [state, dispatch] = useStoreContext();
+	const [dispatch] = useStoreContext();
 
 	const { loading, data: productData } = useQuery(QUERY_GET_PRODUCTS, {
 		variables: {
-			search: keyWord
-		}
+			search: keyWord,
+		},
 	});
 
-	const userData = data?.me || {};
-
-	const [filterData, setFilteredData] = useState({});
-
+	const [setFilteredData] = useState({});
 
 	const handleFilter = (event) => {
 		event.preventDefault();
 
 		const searchKeyword = event.target.value;
-		setKeyWord(searchKeyword)
+		setKeyWord(searchKeyword);
 
 		setFilteredData(searchKeyword);
 		console.log(productData);
@@ -38,30 +35,32 @@ function SearchBar({ placeholder, data }) {
 
 		setFilteredData(searchKeyword);
 	};
-	
-	  // if data isn't here yet, say so
-		if (loading) {
-			return <h2>LOADING...</h2>;
-		}
 
 	return (
-        <Box>
-		<InputGroup>
-			<Input
-				type="text"
-				htmlSize={"100%"}
-				width={"auto"}
-				placeholder="Search for a product"
-				onChange={handleFilter}
-			/>
-			<InputRightElement> 
-				<SearchIcon />               
-			</InputRightElement>
-		</InputGroup>
-        </Box>
+		<Box>
+			<InputGroup>
+				<Input
+					type="text"
+					htmlSize={"100%"}
+					width={"auto"}
+					placeholder="Search for a product"
+					onChange={handleFilter}
+				/>
+				<InputRightElement>
+					<SearchIcon />
+				</InputRightElement>
+			</InputGroup>
+			{loading ? <img src={spinner} alt="loading" /> : null}
+		</Box>
 	);
-
-};
-
+}
 
 export default SearchBar;
+
+
+
+
+
+
+
+
