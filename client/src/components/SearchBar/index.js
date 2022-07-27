@@ -40,8 +40,7 @@ const [state, dispatch] = useStoreContext();
 
 		setFilteredData(searchKeyword);
 	};
-	const searchBtn = () => {
-	}
+	
 	
 	// {
 	// 	 filteredData.length !== 0 && (
