@@ -1,8 +1,9 @@
 import React from "react";
+import { Box } from "@chakra-ui/react";
 
 function Jumbotron({ children }) {
 	return (
-		<div
+		<Box
 			style={{
 				height: 560,
 				clear: "both",
@@ -11,7 +12,7 @@ function Jumbotron({ children }) {
 			}}
 		>
 			{children}
-		</div>
+		</Box>
 	);
 }
 

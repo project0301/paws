@@ -38,31 +38,27 @@ function SearchBar({ placeholder, data }) {
 
 		setFilteredData(searchKeyword);
 	};
-
-	const searchBtn = () => {}
-
-
-
-  // if data isn't here yet, say so
-  if (loading) {
-    return <h2>LOADING...</h2>;
-  }
+	
+	  // if data isn't here yet, say so
+		if (loading) {
+			return <h2>LOADING...</h2>;
+		}
 
 	return (
-		<Box>
-			<InputGroup>
-				<Input
-					type="text"
-					htmlSize={"100%"}
-					width={"auto"}
-					placeholder="Search for a product"
-					onChange={handleFilter}
-				/>
-				<InputRightElement>
-					<SearchIcon onClick={searchBtn} />
-				</InputRightElement>
-			</InputGroup>
-		</Box>
+        <Box>
+		<InputGroup>
+			<Input
+				type="text"
+				htmlSize={"100%"}
+				width={"auto"}
+				placeholder="Search for a product"
+				onChange={handleFilter}
+			/>
+			<InputRightElement> 
+				<SearchIcon />               
+			</InputRightElement>
+		</InputGroup>
+        </Box>
 	);
 
 };
