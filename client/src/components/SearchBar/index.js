@@ -1,27 +1,22 @@
 import React, { useState } from "react";
 import { Input, InputGroup, InputRightElement, Box } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
-import { QUERY_GET_PRODUCTS} from "../../utils/queries"; 
-import {useQuery} from "@apollo/client"; 
+import { QUERY_GET_PRODUCTS } from "../../utils/queries";
+import { useQuery } from "@apollo/client";
 import { useStoreContext } from "../../utils/GlobalState";
 import { UPDATE_PRODUCTS } from "../../utils/actions";
 
 function SearchBar({ placeholder, data }) {
 
-	const { loading, data: productData } = useQuery(QUERY_GET_PRODUCTS);
+	const [keyWord, setKeyWord] = useState("");
+	const [state, dispatch] = useStoreContext();
 
-	const userData = data?.me || {};
+	const { loading, data: productData } = useQuery(QUERY_GET_PRODUCTS, {
+		variables: {
+			search: keyWord
+		}
+	});
 
-	// ask about this function
-	// const {loading, data: productData} = useQuery(QUERY_GET_PRODUCTS);
-const [keyWord, setKeyWord]=useState("");
-const [state, dispatch] = useStoreContext();
-
-    const {loading, data: productData} = useQuery(QUERY_GET_PRODUCTS,{
-        variables:{
-            search: keyWord
-        }
-    });
 	const userData = data?.me || {};
 
 	const [filterData, setFilteredData] = useState({});
@@ -31,45 +26,46 @@ const [state, dispatch] = useStoreContext();
 		event.preventDefault();
 
 		const searchKeyword = event.target.value;
-        setKeyWord(searchKeyword)
+		setKeyWord(searchKeyword)
 
-		// const newfilter = data.filter((value) => {
-		// 	return value.toLowerCase().includes(searchKeyword.toLowerCase());
-		// });
+		setFilteredData(searchKeyword);
+		console.log(productData);
+
+		dispatch({
+			type: UPDATE_PRODUCTS,
+			products: productData.getProducts.products,
+		});
 
 		setFilteredData(searchKeyword);
 	};
-	const searchBtn = () => {
 
-	}
-	// {
-	// 	 filteredData.length !== 0 && (
-	// 	 		{/* ask about this during office hours */}
-	// 	 		userData.map((value, key) => {
-	// 	         return (
-	// 	           <a className="dataItem" href={value}>
-	// 	             <p>{value}</p>
-	// 	           </a>
-	// 	         );
-	// 	       })}
-	// }
+	const searchBtn = () => {}
+
+
+
+  // if data isn't here yet, say so
+  if (loading) {
+    return <h2>LOADING...</h2>;
+  }
 
 	return (
-        <Box>
-		<InputGroup>
-			<Input
-				type="text"
-				htmlSize={"100%"}
-				width={"auto"}
-				placeholder="Search for a product"
-				onChange={handleFilter}
-			/>
-			<InputRightElement> 
-				<SearchIcon onClick={searchBtn} />               
-			</InputRightElement>
-		</InputGroup>
-        </Box>
+		<Box>
+			<InputGroup>
+				<Input
+					type="text"
+					htmlSize={"100%"}
+					width={"auto"}
+					placeholder="Search for a product"
+					onChange={handleFilter}
+				/>
+				<InputRightElement>
+					<SearchIcon onClick={searchBtn} />
+				</InputRightElement>
+			</InputGroup>
+		</Box>
 	);
-}
+
+};
+
 
 export default SearchBar;
