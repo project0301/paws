@@ -170,10 +170,12 @@ function AddProduct(props) {
               class="col-span-2 lg:col-span-1"
               onChange={handleChangeCategory}
             >
-              <option value="food">Food</option>
-              <option value="outfit">Outfit</option>
-              <option value="toys">Toys</option>
-              <option value="other">Other</option>
+              <option value="reptiles">Reptiles</option>
+              <option value="dogs">Dogs</option>
+              <option value="cats">Cats</option>
+              <option value="birds">Birds</option>
+              <option value="rodents">Rodents</option>
+              <option value="fish">Fish</option>
             </select>
           </div>
         </FormControl>
