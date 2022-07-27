@@ -13,80 +13,103 @@ import {
   Heading,
   Image,
   Input,
-  Stack
+  Stack,
 } from "@chakra-ui/react";
 
 function Login(props) {
-	const [formState, setFormState] = useState({ email: "", password: "" });
-	const [login, { error }] = useMutation(LOGIN);
+  const [formState, setFormState] = useState({ email: "", password: "" });
+  const [login, { error }] = useMutation(LOGIN);
 
-	const handleFormSubmit = async (event) => {
-		event.preventDefault();
-		try {
-			const mutationResponse = await login({
-				variables: { email: formState.email, password: formState.password },
-			});
-			const token = mutationResponse.data.login.token;
-			Auth.login(token);
-		} catch (e) {
-			console.log(e);
-		}
-	};
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const mutationResponse = await login({
+        variables: { email: formState.email, password: formState.password },
+      });
+      const token = mutationResponse.data.login.token;
+      Auth.login(token);
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
-	const handleChange = (event) => {
-		const { name, value } = event.target;
-		setFormState({
-			...formState,
-			[name]: value,
-		});
-	};
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormState({
+      ...formState,
+      [name]: value,
+    });
+  };
 
-	return (
-		<Container
-			maxW="lg"
-			py={{ base: "12", md: "24" }}
-			px={{ base: "0", sm: "8" }}
-		>
-			<Stack spacing={"8"}>
-				<Stack spacing="6">
-					<Image src={Logo} boxSize="100px" />
-				</Stack>
-			</Stack>
-			<Link to="/signup">← Go to Signup</Link>
+  return (
+    <Container
+      maxW="lg"
+      py={{ base: "12", md: "24" }}
+      px={{ base: "0", sm: "8" }}
+    >
+      <Stack spacing={"8"}>
+        <Stack spacing="6">
+          <Image src={Logo} boxSize="100px" />
+        </Stack>
+      </Stack>
+      <Link to="/signup">← Go to Signup</Link>
 
-			<Heading as="h2">Login</Heading>
-			<FormControl onSubmit={handleFormSubmit}>
-				<Box className="flex-row space-between my-2">
-					<label htmlFor="email">Email address:</label>
-					<input
-						placeholder="youremail@test.com"
-						name="email"
-						type="email"
-						id="email"
-						onChange={handleChange}
-					/>
-				</Box>
-				<Box className="flex-row space-between my-2">
-					<FormLabel htmlFor="pwd">Password:</FormLabel>
-					<Input
-						placeholder="******"
-						name="password"
-						type="password"
-						id="pwd"
-						onChange={handleChange}
-					/>
-				</Box>
-				{error ? (
-					<Box>
-						<p className="error-text">The provided credentials are incorrect</p>
-					</Box>
-				) : null}
-				<Box className="flex-row flex-end">
-					<Button type="submit">Submit</Button>
-				</Box>
-			</FormControl>
-		</Container>
-	);
+      <Heading as="h2">Login</Heading>
+      <br></br>
+      <FormControl onSubmit={handleFormSubmit}>
+        <Box className="flex-row space-between my-2">
+          <label htmlFor="email">Email address: </label>
+          <Input
+            placeholder="youremail@test.com"
+            name="email"
+            type="email"
+            id="email"
+            onChange={handleChange}
+            pl={"2"}
+            mt="0.1"
+            pt="5"
+            pb="5"
+            w="100%"
+          />
+        </Box>
+        <Box className="flex-row space-between my-2">
+          <FormLabel htmlFor="pwd">Password:</FormLabel>
+          <Input
+            placeholder="******"
+            name="password"
+            type="password"
+            id="pwd"
+            onChange={handleChange}
+            pl={"2"}
+            mt="0.1"
+            pt="1"
+            pb="1"
+            w="100%"
+          />
+        </Box>
+        {error ? (
+          <Box>
+            <p className="error-text">The provided credentials are incorrect</p>
+          </Box>
+        ) : null}
+        <Box className="flex-row flex-end">
+          <Button
+            type="submit"
+            _hover={{ opacity: "0.8" }}
+            mt="5"
+            pt="5"
+            pb="5"
+            w="22%"
+            color="#black"
+            bg="gray.200"
+            fontSize="lg"
+          >
+            Submit
+          </Button>
+        </Box>
+      </FormControl>
+    </Container>
+  );
 }
 
 export default Login;
