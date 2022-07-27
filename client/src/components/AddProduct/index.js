@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import ImageUploading from "react-images-uploading";
 import { Link } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import Auth from "../../utils/auth";
@@ -7,6 +8,7 @@ import {
   Box,
   Button,
   Container,
+  Heading,
   FormControl,
   Input,
   Textarea,
@@ -16,11 +18,14 @@ function AddProduct(props) {
   const [formState, setFormState] = useState({
     title: "",
     description: "",
-    image: "",
     quantity: 0,
     price: 0,
+    category: "",
   });
   const [AddProduct] = useMutation(ADD_PRODUCT);
+
+  // Right now we can only supoort single Image upload, but in the future we can upload multiple images
+  const [images, setImages] = React.useState([]);
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -29,9 +34,10 @@ function AddProduct(props) {
       variables: {
         name: formState.title,
         description: formState.description,
-        image: formState.image,
+        image: images.length ? images[0]?.data_url : "",
         quantity: formState.quantity,
         price: formState.price,
+        category: formState.category,
       },
     });
 
@@ -43,16 +49,24 @@ function AddProduct(props) {
     console.log(formState);
   };
   const handleOnChangeQuantity = (event) => {
-    let quantity = parseInt(event.target.value);
-    setFormState({ ...formState, quantity: quantity });
+    const quantity = parseInt(event.target.value);
+    setFormState({ ...formState, quantity });
   };
   const handleChangePrice = (event) => {
-    let price = parseFloat(event.target.value);
-    setFormState({ ...formState, price: price });
+    const price = parseFloat(event.target.value);
+    setFormState({ ...formState, price });
   };
+  const handleChangeImage = (imageList, addUpdateIndex) => {
+    setImages(imageList);
+  };
+  const handleChangeCategory = (event) => {
+    const category = event.target.value;
+    setFormState({ ...formState, category });
+  };
+
   return (
     <Container className="container-my-2">
-      <heading>Add Product</heading>
+      <Heading>Add Product</Heading>
       <br></br>
       <form onSubmit={handleFormSubmit}>
         <FormControl>
@@ -88,19 +102,31 @@ function AddProduct(props) {
             ></Textarea>
           </Box>
 
-          <input
-            className="file-upload-input"
-            type="file"
-            onChange="readURL(this)"
-            accept="Image/*"
-            id="image"
-            mt="1"
-            mb="8"
-            pt="5"
-            pb="5"
-            w="100%"
-            h="150px"
-          ></input>
+          <ImageUploading
+            value={images}
+            onChange={handleChangeImage}
+            dataURLKey="data_url"
+          >
+            {({
+              imageList,
+              onImageUpload,
+              onImageRemoveAll,
+              onImageUpdate,
+              onImageRemove,
+              isDragging,
+              dragProps,
+            }) => (
+              // write your building UI
+              <div>
+                <button onClick={onImageUpload}>Upload *required</button>
+                {images.map((image, index) => (
+                  <div key={index}>
+                    <img src={image.data_url} alt=""></img>
+                  </div>
+                ))}
+              </div>
+            )}
+          </ImageUploading>
 
           <h2>Quantity: *required</h2>
           <Box pos="relative">
@@ -142,11 +168,14 @@ function AddProduct(props) {
               id="category"
               name="category"
               class="col-span-2 lg:col-span-1"
+              onChange={handleChangeCategory}
             >
-              <option value="1">Food</option>
-              <option value="2">Outfit</option>
-              <option value="3">Toys</option>
-              <option value="3">Other</option>
+              <option value="reptiles">Reptiles</option>
+              <option value="dogs">Dogs</option>
+              <option value="cats">Cats</option>
+              <option value="birds">Birds</option>
+              <option value="rodents">Rodents</option>
+              <option value="fish">Fish</option>
             </select>
           </div>
         </FormControl>
