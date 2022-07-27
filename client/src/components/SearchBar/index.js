@@ -67,7 +67,7 @@ const [state, dispatch] = useStoreContext();
 				onChange={handleFilter}
 			/>
 			<InputRightElement> 
-				<SearchIcon onClick={searchBtn} />               
+				<SearchIcon />               
 			</InputRightElement>
 		</InputGroup>
         </Box>
