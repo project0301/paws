@@ -56,3 +56,11 @@ function SearchBar({ placeholder, data }) {
 }
 
 export default SearchBar;
+
+
+
+
+
+
+
+
