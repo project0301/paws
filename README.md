@@ -30,10 +30,13 @@ The team at Pet Stuff Plus consists of:
 This app is deployed via Heroku and can be found [here](https://petstuffplus.herokuapp.com/).
 
 Here is a screenshot of the Sign Up page:
+<img width="949" alt="signup_page" src="https://user-images.githubusercontent.com/47282257/181626306-bd6d8b72-231a-4eca-bd48-139a0a547f60.png">
 
 Here is a screenshot of the Main homepage:
+<img width="944" alt="homepage" src="https://user-images.githubusercontent.com/47282257/181626326-f80a7046-6e70-442d-bbba-c970e20d5ade.png">
 
 Here is a screenshot of a Product Details page:
+<img width="951" alt="product_details" src="https://user-images.githubusercontent.com/47282257/181626276-a6bb6b5f-03ec-4ddf-b741-9704d64bdd6c.png">
 
 ## Technologies
 
