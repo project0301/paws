@@ -9,7 +9,7 @@ import spinner from "../../assets/spinner.gif";
 
 function SearchBar({ placeholder, data }) {
 	const [keyWord, setKeyWord] = useState("");
-	const [dispatch] = useStoreContext();
+	const [state, dispatch] = useStoreContext();
 
 	const { loading, data: productData } = useQuery(QUERY_GET_PRODUCTS, {
 		variables: {
@@ -17,7 +17,7 @@ function SearchBar({ placeholder, data }) {
 		},
 	});
 
-	const [setFilteredData] = useState({});
+	const [filterData, setFilteredData] = useState({});
 
 	const handleFilter = (event) => {
 		event.preventDefault();
