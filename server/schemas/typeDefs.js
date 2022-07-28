@@ -69,7 +69,6 @@ const typeDefs = gql`
       image: String
       quantity: Int
       price: Float
-      category: String
     ): Product
     updateUser(
       firstName: String

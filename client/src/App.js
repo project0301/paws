@@ -42,7 +42,7 @@ const client = new ApolloClient({
 	cache: new InMemoryCache(),
 });
 
-const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
+const stripePromise = loadStripe("pk_test_TYooMQauvdEDq54NiTphI7jx");
 
 function App() {
 	return (

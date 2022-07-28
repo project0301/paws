@@ -3,6 +3,7 @@ const { User, Product, Category } = require("../models");
 
 db.once("open", async () => {
 	await Category.deleteMany();
+
 	const categories = await Category.insertMany([
 		{ name: "Reptiles" },
 		{ name: "Dogs" },
@@ -11,8 +12,8 @@ db.once("open", async () => {
 		{ name: "Rodents" },
 		{ name: "Fish" },
 	]);
-	console.log("categories seeded");
 
+	console.log("categories seeded");
 	await Product.deleteMany();
 	const products = await Product.insertMany([
 		{
@@ -75,9 +76,11 @@ db.once("open", async () => {
 			quantity: 15,
 		},
 	]);
+
 	console.log("products seeded");
 
 	await User.deleteMany();
+
 	await User.create(
 		{
 			firstName: "Roy",
@@ -113,7 +116,6 @@ db.once("open", async () => {
 			],
 		}
 	);
-	console.log("users seeded");
 
-	process.exit();
+	console.log("users seeded");
 });
